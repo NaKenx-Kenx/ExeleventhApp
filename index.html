@@ -9,7 +9,7 @@
     <meta property="og:title" content="Download Sekarang di Play Store">
     <meta property="og:description" content="Aplikasi resmi Kelas X-11 SMA Negeri 8 Surakarta. Cepat, aman, dan mudah diakses langsung dari genggamanmu!">
     <meta property="og:image" content="https://i.ibb.co.com/pvMJ0WQt/b316cf6f-b2d6-45a8-b81c-0742fd4c8178.png">
-    <meta property="og:url" content="https://yourwebsite.com/index.html"> <!-- Ganti dengan URL hosting web kamu -->
+    <meta property="og:url" content="https://yourwebsite.com/index.html">
     <meta property="og:type" content="website">
 
     <!-- Twitter Card Meta Tags -->
@@ -28,7 +28,6 @@
             --text-main: #202124;
             --text-secondary: #5f6368;
             --border-color: #e0e0e0;
-            --invite-bg: linear-gradient(180deg, #f8faff 0%, #ffffff 100%);
             --badge-bg: #e8f0fe;
             --badge-color: #1a73e8;
             --stats-border: #f1f3f4;
@@ -42,7 +41,6 @@
                 --text-main: #e8eaed;
                 --text-secondary: #9aa0a6;
                 --border-color: #3c4043;
-                --invite-bg: linear-gradient(180deg, #1e1e1e 0%, #242526 100%);
                 --badge-bg: #1f3864;
                 --badge-color: #8ab4f8;
                 --stats-border: #3c4043;
@@ -81,7 +79,10 @@
 
         @media (min-width: 480px) {
             body {
-                background-color: var(--bg-color);
+                background-color: #111;
+                background-image: linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)), url('https://i.pinimg.com/736x/58/c3/33/58c33377dfcbb3022493dec49d098b02.jpg');
+                background-size: cover;
+                background-position: center;
                 padding: 20px;
             }
             .phone-container {
@@ -89,7 +90,7 @@
                 min-height: 820px;
                 max-height: 90vh;
                 border-radius: 28px;
-                box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+                box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
                 border: 1px solid var(--border-color);
                 overflow-y: auto;
             }
@@ -112,11 +113,12 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* --- TAMPILAN PERTAMA (UNDANGAN) --- */
+        /* --- VIEW 1: DINAMIS PLAY STORE INVITE --- */
         #invite-view {
             justify-content: space-between;
-            background: var(--invite-bg);
+            background: var(--container-bg);
             min-height: 100vh;
+            position: relative;
         }
 
         @media (min-width: 480px) {
@@ -125,12 +127,31 @@
             }
         }
 
+        /* Background Pattern khusus non-mobile pada invite-view dengan opacity 25% */
+        @media (min-width: 480px) {
+            #invite-view::before {
+                content: "";
+                position: absolute;
+                top: 0; left: 0; right: 0; bottom: 0;
+                background-image: url('https://i.pinimg.com/736x/58/c3/33/58c33377dfcbb3022493dec49d098b02.jpg');
+                background-size: cover;
+                background-position: center;
+                opacity: 0.25;
+                z-index: 0;
+                pointer-events: none;
+            }
+            #invite-view > * {
+                position: relative;
+                z-index: 1;
+            }
+        }
+
         .invite-header {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding-bottom: 16px;
-            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 12px;
+            margin-bottom: 20px;
         }
 
         .google-play-brand {
@@ -143,42 +164,34 @@
         }
 
         .play-logo-svg {
-            width: 20px;
-            height: 20px;
+            width: 24px;
+            height: 24px;
         }
 
-        .invite-body {
+        .invite-card {
+            background: var(--trust-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 28px 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
             text-align: center;
-            margin: 24px 0;
-        }
-
-        .invite-badge {
-            background-color: var(--badge-bg);
-            color: var(--badge-color);
-            font-size: 12px;
-            font-weight: 600;
-            padding: 6px 16px;
-            border-radius: 20px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.06);
             margin-bottom: 20px;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
         }
 
         .app-placeholder-icon {
-            width: 88px;
-            height: 88px;
+            width: 96px;
+            height: 96px;
             background: #ffffff;
-            border-radius: 22px;
+            border-radius: 24px;
             overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 8px 24px rgba(26, 115, 232, 0.25);
-            margin-bottom: 20px;
+            box-shadow: 0 10px 25px rgba(26, 115, 232, 0.25);
+            margin-bottom: 18px;
             border: 1px solid var(--border-color);
         }
 
@@ -188,51 +201,67 @@
             object-fit: cover;
         }
 
-        #invite-view h1 {
-            font-size: 20px;
+        .invite-card h1 {
+            font-size: 18px;
             font-weight: 700;
             color: var(--text-main);
-            margin-bottom: 12px;
+            margin-bottom: 6px;
             line-height: 1.4;
         }
 
         .user-highlight {
-            background-color: var(--badge-bg);
             color: var(--badge-color);
-            padding: 2px 8px;
-            border-radius: 6px;
-            font-weight: 600;
-            display: inline-block;
+            font-weight: 700;
         }
 
         .email-tag {
-            display: block;
-            font-size: 13px;
+            font-size: 12px;
             color: var(--text-secondary);
-            font-weight: 400;
-            margin-top: 4px;
+            margin-bottom: 14px;
+            display: block;
+            background: var(--badge-bg);
+            padding: 3px 10px;
+            border-radius: 12px;
         }
 
-        #invite-view p.description {
-            font-size: 14px;
+        .invite-card p.description {
+            font-size: 13px;
             color: var(--text-secondary);
-            line-height: 1.6;
-            margin-top: 12px;
-            margin-bottom: 28px;
+            line-height: 1.5;
+            margin-bottom: 24px;
+        }
+
+        .btn-primary {
+            width: 100%;
+            background-color: #1a73e8;
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 12px rgba(26, 115, 232, 0.3);
+            text-align: center;
+        }
+
+        .btn-primary:hover {
+            background-color: #1557b0;
         }
 
         .invite-footer {
-            padding-top: 16px;
-            border-top: 1px solid var(--border-color);
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            gap: 6px;
             font-size: 12px;
             color: var(--text-secondary);
+            margin-top: auto;
+            padding-top: 16px;
         }
 
-        /* --- TAMPILAN KEDUA (PLAY STORE LAYOUT) --- */
+        /* --- VIEW 2: STORE LAYOUT --- */
         .store-header {
             display: flex;
             align-items: center;
@@ -259,17 +288,20 @@
             margin-bottom: 20px;
         }
 
-        /* Wrapper Ikon Kecil ala Play Store */
+        /* Wrapper Ikon Kecil ala Play Store dengan Progress Ring di Samping Luar Ikon */
         .app-icon-wrapper {
             position: relative;
-            width: 72px;
-            height: 72px;
+            width: 84px;
+            height: 84px;
             flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .app-icon-small {
-            width: 100%;
-            height: 100%;
+            width: 72px;
+            height: 72px;
             background: #ffffff;
             border-radius: 16px;
             overflow: hidden;
@@ -280,7 +312,6 @@
             border: 1px solid var(--border-color);
             position: relative;
             z-index: 2;
-            transition: filter 0.3s;
         }
 
         .app-icon-small img {
@@ -289,11 +320,11 @@
             object-fit: cover;
         }
 
-        /* SVG Progress Ring ala Play Store (Lingkaran Progres Persentase) */
+        /* SVG Progress Ring tepat di luar samping ikon (tidak menimpa isi ikon) */
         .play-progress-svg {
             position: absolute;
-            top: -6px;
-            left: -6px;
+            top: 0;
+            left: 0;
             width: 84px;
             height: 84px;
             transform: rotate(-90deg);
@@ -304,63 +335,21 @@
 
         .play-progress-svg.active {
             display: block;
+            animation: rotateRing 1.8s linear infinite;
         }
 
-        .progress-bg-circle {
-            fill: none;
-            stroke: rgba(26, 115, 232, 0.2);
-            stroke-width: 3.5;
+        @keyframes rotateRing {
+            0% { transform: rotate(-90deg); }
+            100% { transform: rotate(270deg); }
         }
 
         .progress-bar-circle {
             fill: none;
             stroke: #1a73e8;
-            stroke-width: 3.5;
+            stroke-width: 4;
             stroke-linecap: round;
             stroke-dasharray: 226;
-            stroke-dashoffset: 226;
-            transition: stroke-dashoffset 0.1s linear;
-        }
-
-        /* Overlay Gelap & Ikon Download di Tengah Ikon Saat Loading */
-        .downloading-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.45);
-            border-radius: 16px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            z-index: 3;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s;
-        }
-
-        .downloading-overlay.active {
-            opacity: 1;
-        }
-
-        .downloading-overlay .material-icons-round {
-            color: #ffffff;
-            font-size: 26px;
-            animation: bounceDown 1s infinite;
-        }
-
-        .downloading-overlay .progress-text {
-            color: #ffffff;
-            font-size: 10px;
-            font-weight: 700;
-            margin-top: 2px;
-        }
-
-        @keyframes bounceDown {
-            0%, 100% { transform: translateY(-2px); }
-            50% { transform: translateY(3px); }
+            stroke-dashoffset: 60;
         }
 
         .app-meta h2 {
@@ -417,29 +406,6 @@
             margin-bottom: 20px;
         }
 
-        .btn-download {
-            width: 100%;
-            background-color: #1a73e8;
-            color: white;
-            border: none;
-            padding: 14px;
-            border-radius: 8px;
-            font-size: 15px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background 0.2s, box-shadow 0.2s;
-            box-shadow: 0 2px 6px rgba(26, 115, 232, 0.3);
-            text-align: center;
-            text-decoration: none;
-            display: block;
-        }
-
-        .btn-download:hover {
-            background-color: #1557b0;
-            box-shadow: 0 4px 12px rgba(26, 115, 232, 0.4);
-        }
-
-        /* Screenshot Carousel */
         .screenshots-container {
             margin-bottom: 24px;
         }
@@ -460,7 +426,6 @@
             overflow: hidden;
             border: 1px solid var(--border-color);
             flex-shrink: 0;
-            position: relative;
             cursor: pointer;
             transition: transform 0.2s;
         }
@@ -507,7 +472,7 @@
             font-size: 20px;
         }
 
-        /* --- MODAL FULLSCREEN SCREENSHOT --- */
+        /* --- LIGHTBOX MODAL --- */
         #lightbox-modal {
             display: none;
             position: fixed;
@@ -548,59 +513,57 @@
 
 <div class="phone-container">
 
-    <!-- VIEW 1: UNDANGAN PERTAMA -->
+    <!-- VIEW 1: DINAMIS PLAY STORE STYLE INVITE -->
     <div id="invite-view" class="view active">
         <div class="invite-header">
             <div class="google-play-brand">
-                <svg class="play-logo-svg" viewBox="0 0 24 24">
-                    <path fill="#4285F4" d="M3.609 1.814L13.791 12 3.61 22.186c-.381-.355-.61-.861-.61-1.428V3.242c0-.567.229-1.073.609-1.428z"/>
-                    <path fill="#34A853" d="M17.225 8.566l-3.434 3.434 3.434 3.434 3.869-2.201c.664-.378.664-1.288 0-1.666l-3.869-2.201z"/>
-                    <path fill="#EA4335" d="M3.609 1.814L14.35 12.555l2.875-2.875L4.475.617C4.17.444 3.824.408 3.609 1.814z"/>
-                    <path fill="#FBBC04" d="M3.609 22.186c.215 1.406.561 1.37 8.66 1.197l-2.875-2.875L3.609 22.186z"/>
+                <!-- Logo Play Store Sesuai Gambar Referensi -->
+                <svg class="play-logo-svg" viewBox="0 0 512 512">
+                    <path fill="#00b9ff" d="M33.723 18.067c-13.62 10.422-21.723 27.25-21.723 46.216v375.434c0 18.966 8.103 35.794 21.723 46.216l3.415 2.502L282.88 259.982V252.01L37.138 15.565l-3.415 2.502z"/>
+                    <path fill="#ffba00" d="M362.593 339.694L282.88 259.982V252.01l79.713-79.713.883.513 93.308 53.116c26.657 15.176 26.657 39.996 0 55.172l-93.308 53.116-.883.513z"/>
+                    <path fill="#ff334b" d="M363.476 340.207L282.88 259.982 58.744 484.118c8.895 9.387 23.376 10.158 37.111 2.333l267.621-146.244z"/>
+                    <path fill="#00f076" d="M363.476 171.793L95.855 25.55C82.12 17.725 67.639 18.496 58.744 27.883L282.88 252.01l80.596-80.217z"/>
                 </svg>
                 <span>Google Play</span>
             </div>
-            <span class="material-icons-round" style="font-size: 20px;">verified_user</span>
+            <span class="material-icons-round" style="font-size: 20px; color: #137333;">verified_user</span>
         </div>
 
-        <div class="invite-body">
-            <div class="invite-badge">
-                <span class="material-icons-round" style="font-size: 16px;">mark_email_read</span> Undangan Resmi
-            </div>
-            
+        <div class="invite-card">
             <div class="app-placeholder-icon">
                 <img src="https://i.ibb.co.com/pvMJ0WQt/b316cf6f-b2d6-45a8-b81c-0742fd4c8178.png" alt="App Icon">
             </div>
             
             <h1>
-                <span class="user-highlight">Keanu</span> mengundangmu untuk mencoba aplikasinya!
-                <span class="email-tag">(keanumax3@gmail.com)</span>
+                <span class="user-highlight">Keanu</span> mengundangmu menginstal aplikasi ini
             </h1>
+            <span class="email-tag">keanumax3@gmail.com</span>
 
             <p class="description">
-                Aplikasi resmi untuk kelas X-11 SMA Negeri 8 Surakarta. Dilengkapi dengan fitur-fitur yang menarik dan fungsional.
+                Aplikasi resmi untuk kelas X-11 SMA Negeri 8 Surakarta. Cepat, aman, dan mudah diakses.
             </p>
 
-            <button class="btn-download" onclick="goToStoreView()">Download Sekarang</button>
+            <button class="btn-primary" onclick="goToStoreView()">Lihat di Play Store</button>
         </div>
 
         <div class="invite-footer">
             <span class="material-icons-round" style="font-size: 16px; color: #137333;">security</span>
-            <span>Tautan undangan terverifikasi aman & bebas malware</span>
+            <span>Google Play Protect terverifikasi aman</span>
         </div>
     </div>
 
-    <!-- VIEW 2: PLAY STORE LAYOUT -->
+    <!-- VIEW 2: STORE LAYOUT -->
     <div id="store-view" class="view">
         <div class="store-header">
             <div class="store-header-left">
                 <span class="material-icons-round" onclick="goToIntroView()">arrow_back</span>
                 <div class="google-play-brand">
-                    <svg class="play-logo-svg" viewBox="0 0 24 24">
-                        <path fill="#4285F4" d="M3.609 1.814L13.791 12 3.61 22.186c-.381-.355-.61-.861-.61-1.428V3.242c0-.567.229-1.073.609-1.428z"/>
-                        <path fill="#34A853" d="M17.225 8.566l-3.434 3.434 3.434 3.434 3.869-2.201c.664-.378.664-1.288 0-1.666l-3.869-2.201z"/>
-                        <path fill="#EA4335" d="M3.609 1.814L14.35 12.555l2.875-2.875L4.475.617C4.17.444 3.824.408 3.609 1.814z"/>
-                        <path fill="#FBBC04" d="M3.609 22.186c.215 1.406.561 1.37 8.66 1.197l-2.875-2.875L3.609 22.186z"/>
+                    <!-- Logo Play Store Sesuai Gambar Referensi -->
+                    <svg class="play-logo-svg" viewBox="0 0 512 512">
+                    <path fill="#00b9ff" d="M33.723 18.067c-13.62 10.422-21.723 27.25-21.723 46.216v375.434c0 18.966 8.103 35.794 21.723 46.216l3.415 2.502L282.88 259.982V252.01L37.138 15.565l-3.415 2.502z"/>
+                    <path fill="#ffba00" d="M362.593 339.694L282.88 259.982V252.01l79.713-79.713.883.513 93.308 53.116c26.657 15.176 26.657 39.996 0 55.172l-93.308 53.116-.883.513z"/>
+                    <path fill="#ff334b" d="M363.476 340.207L282.88 259.982 58.744 484.118c8.895 9.387 23.376 10.158 37.111 2.333l267.621-146.244z"/>
+                    <path fill="#00f076" d="M363.476 171.793L95.855 25.55C82.12 17.725 67.639 18.496 58.744 27.883L282.88 252.01l80.596-80.217z"/>
                     </svg>
                     <span>Google Play</span>
                 </div>
@@ -609,17 +572,12 @@
         </div>
 
         <div class="app-hero">
-            <!-- Ikon dengan SVG Progress Ring ala Play Store -->
+            <!-- Ikon dengan SVG Progress Ring di samping luar ikon -->
             <div class="app-icon-wrapper">
                 <svg id="play-progress-svg" class="play-progress-svg" viewBox="0 0 84 84">
-                    <circle class="progress-bg-circle" cx="42" cy="42" r="36"></circle>
-                    <circle id="progress-bar-circle" class="progress-bar-circle" cx="42" cy="42" r="36"></circle>
+                    <circle class="progress-bar-circle" cx="42" cy="42" r="38"></circle>
                 </svg>
                 <div class="app-icon-small">
-                    <div id="downloading-overlay" class="downloading-overlay">
-                        <span class="material-icons-round">arrow_downward</span>
-                        <span id="progress-text" class="progress-text">0%</span>
-                    </div>
                     <img src="https://i.ibb.co.com/pvMJ0WQt/b316cf6f-b2d6-45a8-b81c-0742fd4c8178.png" alt="App Icon">
                 </div>
             </div>
@@ -646,7 +604,7 @@
         </div>
 
         <div class="action-container">
-            <button id="download-btn" class="btn-download" onclick="startDownload()">Download Sekarang</button>
+            <button id="download-btn" class="btn-primary" onclick="startDownload()">Install</button>
         </div>
 
         <div class="screenshots-container">
@@ -706,53 +664,29 @@
         document.getElementById('invite-view').classList.add('active');
     }
 
-    // Fungsi Animasi Persentase Lingkaran Progres 100% ala Play Store
+    // Fungsi Animasi Ring Play Store Asli di Luar Ikon
     function startDownload() {
         const svgRing = document.getElementById('play-progress-svg');
-        const progressBar = document.getElementById('progress-bar-circle');
-        const overlay = document.getElementById('downloading-overlay');
-        const progressText = document.getElementById('progress-text');
         const btn = document.getElementById('download-btn');
         const downloadUrl = "https://download1649.mediafire.com/vjfe2k9ttphgI3wpFOq20WAds-tkl9zDOu6Chln32rSKPoOnnpclvLTN-ywb5dt--oHfsiQvE_THRPNeNwzTXKw9w3Tgurv_nsj4TNErzPfCh2k4u3yWGmAARge2fq0lUCzH7yfE-YiP_q7xS0YGfe8ibXxen3-ICiwi-DCiBg/h6liozev4hpqpjr/Exeleventh_2+application.apk";
 
         svgRing.classList.add('active');
-        overlay.classList.add('active');
-        btn.innerText = "Pending...";
+        btn.innerText = "Menunggu...";
         btn.style.opacity = "0.7";
         btn.style.pointerEvents = "none";
 
-        let currentPercent = 0;
-        const totalLength = 226;
+        setTimeout(() => {
+            btn.innerText = "Menginstal...";
+        }, 2000);
 
-        const interval = setInterval(() => {
-            currentPercent += Math.floor(Math.random() * 8) + 5;
-            if (currentPercent >= 100) {
-                currentPercent = 100;
-                clearInterval(interval);
-                
-                btn.innerText = "Memasang...";
-                
-                setTimeout(() => {
-                    svgRing.classList.remove('active');
-                    overlay.classList.remove('active');
-                    progressBar.style.strokeDashoffset = totalLength;
-                    progressText.innerText = "0%";
-                    btn.innerText = "Download Sekarang";
-                    btn.style.opacity = "1";
-                    btn.style.pointerEvents = "auto";
+        setTimeout(() => {
+            svgRing.classList.remove('active');
+            btn.innerText = "Install";
+            btn.style.opacity = "1";
+            btn.style.pointerEvents = "auto";
 
-                    window.open(downloadUrl, '_blank');
-                }, 600);
-            }
-
-            progressText.innerText = currentPercent + "%";
-            const offset = totalLength - (currentPercent / 100) * totalLength;
-            progressBar.style.strokeDashoffset = offset;
-
-            if (currentPercent > 20) {
-                btn.innerText = "Mempersiapkan [" + currentPercent + "%]";
-            }
-        }, 80);
+            window.open(downloadUrl, '_blank');
+        }, 4000);
     }
 
     function shareApp() {
