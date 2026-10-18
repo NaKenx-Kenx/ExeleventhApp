@@ -4,6 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Exeleventh - Class X-11 Informations</title>
+    
+    <!-- Meta Tags untuk Preview WhatsApp / Open Graph -->
+    <meta property="og:title" content="Download Sekarang di Play Store">
+    <meta property="og:description" content="Aplikasi resmi Kelas X-11 SMA Negeri 8 Surakarta. Cepat, aman, dan mudah diakses langsung dari genggamanmu!">
+    <meta property="og:image" content="https://i.ibb.co.com/pvMJ0WQt/b316cf6f-b2d6-45a8-b81c-0742fd4c8178.png">
+    <meta property="og:url" content="https://yourwebsite.com/index.html"> <!-- Ganti dengan URL hosting web kamu -->
+    <meta property="og:type" content="website">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Download Sekarang di Play Store">
+    <meta name="twitter:description" content="Aplikasi resmi Kelas X-11 SMA Negeri 8 Surakarta.">
+    <meta name="twitter:image" content="https://i.ibb.co.com/pvMJ0WQt/b316cf6f-b2d6-45a8-b81c-0742fd4c8178.png">
+
     <!-- Google Fonts & Material Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
@@ -303,7 +317,7 @@
             stroke: #1a73e8;
             stroke-width: 3.5;
             stroke-linecap: round;
-            stroke-dasharray: 226; /* Keliling lingkaran (2 * pi * 36) */
+            stroke-dasharray: 226;
             stroke-dashoffset: 226;
             transition: stroke-dashoffset 0.1s linear;
         }
@@ -701,7 +715,6 @@
         const btn = document.getElementById('download-btn');
         const downloadUrl = "https://download1649.mediafire.com/vjfe2k9ttphgI3wpFOq20WAds-tkl9zDOu6Chln32rSKPoOnnpclvLTN-ywb5dt--oHfsiQvE_THRPNeNwzTXKw9w3Tgurv_nsj4TNErzPfCh2k4u3yWGmAARge2fq0lUCzH7yfE-YiP_q7xS0YGfe8ibXxen3-ICiwi-DCiBg/h6liozev4hpqpjr/Exeleventh_2+application.apk";
 
-        // Tampilkan elemen animasi progres
         svgRing.classList.add('active');
         overlay.classList.add('active');
         btn.innerText = "Pending...";
@@ -709,11 +722,10 @@
         btn.style.pointerEvents = "none";
 
         let currentPercent = 0;
-        const totalLength = 226; // Keliling lingkaran lingkaran SVG
+        const totalLength = 226;
 
-        // Simulasi progres unduhan bertahap dari 0% hingga 100% dalam waktu ~1.8 detik
         const interval = setInterval(() => {
-            currentPercent += Math.floor(Math.random() * 8) + 5; // Increment acak agar natural
+            currentPercent += Math.floor(Math.random() * 8) + 5;
             if (currentPercent >= 100) {
                 currentPercent = 100;
                 clearInterval(interval);
@@ -723,18 +735,16 @@
                 setTimeout(() => {
                     svgRing.classList.remove('active');
                     overlay.classList.remove('active');
-                    progressBar.style.strokeDashoffset = totalLength; // Reset lingkaran
+                    progressBar.style.strokeDashoffset = totalLength;
                     progressText.innerText = "0%";
                     btn.innerText = "Download Sekarang";
                     btn.style.opacity = "1";
                     btn.style.pointerEvents = "auto";
 
-                    // Buka tautan download file APK
                     window.open(downloadUrl, '_blank');
                 }, 600);
             }
 
-            // Update teks persentase dan lingkaran progres SVG
             progressText.innerText = currentPercent + "%";
             const offset = totalLength - (currentPercent / 100) * totalLength;
             progressBar.style.strokeDashoffset = offset;
@@ -746,7 +756,7 @@
     }
 
     function shareApp() {
-        const shareUrl = 'https://www.shopee.com';
+        const shareUrl = window.location.href;
         if (navigator.share) {
             navigator.share({
                 title: 'Exeleventh - Class X-11 Informations',
@@ -755,7 +765,7 @@
             }).catch((error) => console.log('Gagal membagikan', error));
         } else {
             navigator.clipboard.writeText(shareUrl);
-            alert('Tautan www.shopee.com berhasil disalin ke clipboard!');
+            alert('Tautan berhasil disalin ke clipboard!');
         }
     }
 
